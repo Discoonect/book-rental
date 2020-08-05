@@ -24,10 +24,8 @@ exports.bookRental = async (req, res, next) => {
   let date = new Date();
   date.setDate(date.getDate() + 7);
 
-  let limit_time = date.toLocaleDateString();
-
   query = `insert into book_rental(user_id,book_id,limit_date) values(?,?,?)`;
-  data = [user_id, book_id, limit_time];
+  data = [user_id, book_id, date];
 
   try {
     [result] = await connection.query(query, data);
