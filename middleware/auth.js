@@ -16,7 +16,7 @@ const auth = async (req, res, next) => {
   let user_id = decoded.id;
 
   let query =
-    "select bu.id, bu.user_email,bu.created_at,bt.token \
+    "select bu.id, bu.user_email,bu.user_age,bt.token \
       from book_user_token as bt \
       join book_user as bu \
       on bt.user_id = bu.id \
@@ -29,6 +29,7 @@ const auth = async (req, res, next) => {
       res.status(401).json({ error: "Please authenticate!" });
     } else {
       req.user = rows[0];
+      console.log(req.user);
       next();
     }
   } catch (e) {
